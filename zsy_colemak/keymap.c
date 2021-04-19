@@ -25,20 +25,19 @@
 #define MV 3 // Funtion and movement
 #define NUM 2 // Num pad
 
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * | ESC    |  !   |  "   |  #   |  #   |  %   | &    |           | Prt  |  /   |  (   |  )   |  =   |  ?   |  _     |
- * |        |  1   |  2 @ |  3 £ |  4 $ |  5 € | 6    |           | Scr  |  7 { |  8 [ |  9 ] |  0 } |  + \ |  - –   |
+ * | ESC    |  !   |  "   |  #   |  #   |  %   | &    |           |Light |  /   |  (   |  )   |  =   |  ?   |  _     |
+ * |        |  1   |  2 @ |  3 £ |  4 $ |  5 € | 6    |           |      |  7 { |  8 [ |  9 ] |  0 } |  + \ |  - –   |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * | Tab    | Q    | W    | F    | P    | G    |  TG  |           | Num  | J    | L    | U    | Y    | ^    | `      |
+ * | Tab    | Q    | W    | F    | P    | G    |  MO  |           |  MO  | J    | L    | U    | Y    | ^    | `      |
  * |        |      |      |      |      |      |      |           |      |      |      |      |      | ¨ ~  | ´ ¸    |
- * |--------+------+------+------+------+------| (L1) |           |      |------+------+------+------+------+--------|
+ * |--------+------+------+------+------+------| (L1) |           | (L1) |------+------+------+------+------+--------|
  * | LShift | A    | R    | S    | T    | D    |------|           |------| H    |  N   | E    | I    | O    | RShift |
- * |        |      |      |      | LT(1)|      |      |           |      |      | LT(1)|      |      |      |        |
- * |--------+------+------+------+------+------| LGUI |           | LGUI |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |--------+------+------+------+------+------| LGUI |           | Num  |------+------+------+------+------+--------|
  * | <>|    | Z    | X    | C    | V    | B    |      |           |      | K    | M    | ;    | :    | _    | '*ˇ    |
  * | LShift |      |      |      |      |      |      |           |      |      |      | ,    | .    | - –  | RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
@@ -46,31 +45,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   |      |      |      |       |      |                                       |      |     |      |      |       |
  *   `----------------------------------'                                        `----------------------------------'
  *                                        ,-------------.       ,--------------.
-u *                                        |  WB  | WF   |       | Home |  End  |
+ *                                        |  WB  | WF   |       | Home |  End  |
  *                                 ,------|------|------|       |------+-------+------.
  *                                 |      |      | QWERT|       | PgUp |       |      |
  *                                 |Space | Del  |------|       |------| Enter |Back  |
- *                                 |      |      | Undo |       | PgDn |       |Space |
+ *                                 |      |      | MV   |       | PgDn |       |Space |
  *                                 `--------------------'       `---------------------'
  */
   
 [BASE] = LAYOUT_ergodox(  // layer 0 : default
     // left hand
     KC_ESC,          KC_1,     KC_2,     KC_3,    KC_4,    KC_5,   KC_6,
-    KC_TAB,          KC_Q,     KC_W,     KC_F,    KC_P,    KC_G,   TT(MV),
-    KC_LSFT,    KC_A,     KC_R,     KC_S,    LT(MV, KC_T),    KC_D,
+    KC_TAB,          KC_Q,     KC_W,     KC_F,    KC_P,    KC_G,   MO(MV),
+    KC_LSFT,    KC_A,     KC_R,     KC_S,    KC_T,    KC_D,
     SFT_T(NO_LESS),  KC_Z,     KC_X,     KC_C,    KC_V,    KC_B,   KC_LGUI,
     KC_LCTRL, KC_LCTRL,  KC_LEFT, KC_RIGHT, KC_LALT, 
     KC_WBAK,  KC_WFWD,
-    TO(GAME),
-    KC_SPC, KC_DEL, KC_UNDO,
+    TO(QWERT),
+    KC_SPC, KC_DEL, TO(MV),
 
     // right hand
-    KC_PSCREEN, KC_7,   KC_8,    KC_9,    KC_0,    NO_PLUS,  KC_PSCREEN,
-    TO(NUM),   KC_J,   KC_L,    KC_U,    KC_Y,     NO_QUOT,  NO_ACUT,
-        KC_H,   LT(MV, KC_N),    KC_E,    KC_I,    KC_O,     KC_RSFT,
-    KC_LGUI, KC_K,   KC_M,    KC_COMM, KC_DOT,     NO_MINS,  SFT_T(NO_APOS),
-                      NO_ALGR,  KC_DOWN, KC_UP,    KC_RCTRL, KC_RCTRL,
+    RGB_TOG, KC_7,   KC_8,    KC_9,    KC_0,    NO_PLUS,  KC_PSCREEN,
+    MO(MV),   KC_J,   KC_L,    KC_U,    KC_Y,     NO_QUOT,  NO_ACUT,
+        KC_H,   KC_N,    KC_E,    KC_I,    KC_O,     KC_RSFT,
+    TO(NUM), KC_K,   KC_M,    KC_COMM, KC_DOT,     NO_MINS,  SFT_T(NO_APOS),
+                      KC_ALGR,  KC_DOWN, KC_UP,    KC_RCTRL, KC_RCTRL,
     KC_HOME,   KC_END, 
     KC_PGUP,
     KC_PGDN,   KC_ENTER, KC_BSPC
